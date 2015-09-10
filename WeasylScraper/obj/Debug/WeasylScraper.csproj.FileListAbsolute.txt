@@ -1,0 +1,12 @@
+C:\Users\Taylias\Documents\GitHub\WeaselCrawler\WeasylScraper\bin\Debug\WeasylScraper.exe.config
+C:\Users\Taylias\Documents\GitHub\WeaselCrawler\WeasylScraper\bin\Debug\WeasylScraper.exe
+C:\Users\Taylias\Documents\GitHub\WeaselCrawler\WeasylScraper\bin\Debug\WeasylScraper.pdb
+C:\Users\Taylias\Documents\GitHub\WeaselCrawler\WeasylScraper\bin\Debug\HtmlAgilityPack.dll
+C:\Users\Taylias\Documents\GitHub\WeaselCrawler\WeasylScraper\bin\Debug\HtmlAgilityPack.pdb
+C:\Users\Taylias\Documents\GitHub\WeaselCrawler\WeasylScraper\bin\Debug\HtmlAgilityPack.xml
+C:\Users\Taylias\Documents\GitHub\WeaselCrawler\WeasylScraper\obj\Debug\WeasylScraper.csprojResolveAssemblyReference.cache
+C:\Users\Taylias\Documents\GitHub\WeaselCrawler\WeasylScraper\obj\Debug\WeasylScraper.Form1.resources
+C:\Users\Taylias\Documents\GitHub\WeaselCrawler\WeasylScraper\obj\Debug\WeasylScraper.Properties.Resources.resources
+C:\Users\Taylias\Documents\GitHub\WeaselCrawler\WeasylScraper\obj\Debug\WeasylScraper.csproj.GenerateResource.Cache
+C:\Users\Taylias\Documents\GitHub\WeaselCrawler\WeasylScraper\obj\Debug\WeasylScraper.exe
+C:\Users\Taylias\Documents\GitHub\WeaselCrawler\WeasylScraper\obj\Debug\WeasylScraper.pdb

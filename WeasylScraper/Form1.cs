@@ -19,7 +19,7 @@ namespace WeasylScraper
         public List<User> MasterList;
         public HashSet<string> MasterHash;
         public HashSet<string> CrawledHash;
-        public int CrawlIndex = 0;
+        public int CrawlIndex = -1;
         int function = 0; //1 - Followers | 2 - Following | 3 - Build Master List
         User currentUser;
 
@@ -69,29 +69,6 @@ namespace WeasylScraper
 
         }
 
-        private void btnFollowing_Click(object sender, EventArgs e)
-        {
-            //Gathers a list of usernames from the current user's following list.
-            function = 2;
-            wbMain.DocumentCompleted += ParsePage_Following;
-            wbMain.Navigate("http://weasyl.com/following/TayliasTwist");
-        }
-
-        private void ParsePage_Following(object sender, WebBrowserDocumentCompletedEventArgs e)
-        { //This is really kind of just a debug function to see what kind of following list a user comes up with.
-            if (e.Url != wbMain.Url || function != 2)
-                return;
-            List<String> lstFollowing = new List<string>();
-            HtmlAgilityPack.HtmlDocument document = new HtmlAgilityPack.HtmlDocument();
-            document.LoadHtml(wbMain.DocumentText);
-
-            String page = document.ToString();
-            HtmlNodeCollection nodes = document.DocumentNode.SelectNodes("//a[@class='avatar']/@href");
-
-            foreach (HtmlNode node in nodes)
-                lstFollowing.Add(node.Attributes[1].Value.ToString().Replace("/~", ""));
-
-        }
 
         private void btnBuildMaster_Click(object sender, EventArgs e)
         {
@@ -100,12 +77,14 @@ namespace WeasylScraper
 
             function = 3;
             wbMain.DocumentCompleted += ParsePage_BuildMaster;
-            wbMain.Navigate("http://weasyl.com/following/Peritian");
-            MasterList.Add(new User("Peritian"));
-            //Fill in my initial expanded stats.
-            MasterHash.Add("peritian");
-            CrawledHash.Add("peritian");
-            tbLog.AppendText("Crawling Peritian.\n");
+            
+            if (MasterList.Count < 1)
+                MasterList.Add(new User("Peritian"));
+
+            foreach (object o in CrawledHash)
+                CrawlIndex++;                
+
+            NextUser();
 
 
         }
@@ -120,16 +99,16 @@ namespace WeasylScraper
             }
             string nextUser = MasterList[CrawlIndex].username;
 
-            if (CrawlIndex == 1) //This is to make sure I'm not DoS'ing the server on my test runs.
+            if (CrawlIndex % 10 == 0) //This is to make sure I'm not DoS'ing the server on my test runs.
             {
                 WriteMasterList();
-                return;
+                tbLog.AppendText("Wrote to master flat file.\n");
+                //return;
             }
 
             //Randomized thread sleep timer between 0.1 - 1.0 seconds to at least attempt to appear to be legitimate traffic.
             tbLog.AppendText("Crawling " + nextUser + ".\n");
             wbMain.Navigate("http://weasyl.com/following/" + nextUser);
-
             
         }
 
@@ -138,8 +117,13 @@ namespace WeasylScraper
             if (e.Url != wbMain.Url || function != 3)
                 return;
 
-
             string currentUser = e.Url.ToString().Substring(e.Url.ToString().LastIndexOf('/') + 1);
+            if (CrawledHash.Contains(currentUser))
+            {
+                tbLog.AppendText("Skipping " + currentUser + ", already crawled.\n");
+                NextUser();
+                return;
+            }
 
             HtmlAgilityPack.HtmlDocument document = new HtmlAgilityPack.HtmlDocument();
             document.LoadHtml(wbMain.DocumentText);
@@ -166,13 +150,15 @@ namespace WeasylScraper
                 
             }
 
+            if (!currentUser.Contains("userid"))
+                if (!CrawledHash.Contains(currentUser))
+                    CrawledHash.Add(currentUser);
+
             //Click Next Button (or go to that url rather)
             HtmlNode nodeNext = document.DocumentNode.SelectSingleNode("//a[text()[contains(.,'Next')]]");
 
             if (nodeNext != null)
             {
-                if (!currentUser.Contains("userid"))
-                    CrawledHash.Add(currentUser);
                 string nextURL = nodeNext.OuterHtml.ToString();
                 nextURL = nextURL.Substring(nextURL.IndexOf('/')).Split('\"')[0];
                 wbMain.Navigate("http://weasyl.com" + nextURL);
@@ -186,8 +172,8 @@ namespace WeasylScraper
 
         public void WriteMasterList()
         {
-            if (!File.Exists("MasterList.txt"))
-                File.Create("MasterList.txt").Close();
+            if (File.Exists("MasterList.txt"))
+                File.Delete("MasterList.txt");
 
             using (StreamWriter writer = File.AppendText("MasterList.txt"))
             {
@@ -195,6 +181,30 @@ namespace WeasylScraper
                     writer.WriteLine( (!CrawledHash.Contains(user.username) ? "*" : "") + user.username);
             }
             
+        }
+
+        private void LoadMasterFile()
+        {
+            int crawledCount = 0;
+            int masterCount = 0;
+            foreach (string line in File.ReadLines("MasterList.txt"))
+            {
+                if (!line.Contains("*"))
+                {
+                    CrawledHash.Add(line);
+                    crawledCount++;
+                }
+                MasterList.Add(new User(line.Replace("*", "")));
+                MasterHash.Add(line.Replace("*", ""));
+                masterCount++;
+            }
+
+            tbLog.AppendText("Master file loaded.\nTotal Users: " + masterCount + "\nAlready Crawled: " + crawledCount + "\n");
+        }
+
+        private void btnLoad_Click(object sender, EventArgs e)
+        {
+            LoadMasterFile();
         }
 
     }

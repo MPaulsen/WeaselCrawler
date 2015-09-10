@@ -30,48 +30,37 @@
         {
             this.wbMain = new System.Windows.Forms.WebBrowser();
             this.btnFollowers = new System.Windows.Forms.Button();
-            this.btnFollowing = new System.Windows.Forms.Button();
             this.btnBuildMaster = new System.Windows.Forms.Button();
             this.tbLog = new System.Windows.Forms.RichTextBox();
+            this.btnLoad = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // wbMain
             // 
             this.wbMain.Location = new System.Drawing.Point(0, 0);
-            this.wbMain.Margin = new System.Windows.Forms.Padding(8, 8, 8, 41);
-            this.wbMain.MinimumSize = new System.Drawing.Size(15, 16);
+            this.wbMain.Margin = new System.Windows.Forms.Padding(11, 10, 11, 50);
+            this.wbMain.MinimumSize = new System.Drawing.Size(20, 20);
             this.wbMain.Name = "wbMain";
-            this.wbMain.Size = new System.Drawing.Size(795, 712);
+            this.wbMain.Size = new System.Drawing.Size(1060, 876);
             this.wbMain.TabIndex = 0;
             // 
             // btnFollowers
             // 
-            this.btnFollowers.Location = new System.Drawing.Point(941, 11);
-            this.btnFollowers.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnFollowers.Location = new System.Drawing.Point(1255, 14);
+            this.btnFollowers.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnFollowers.Name = "btnFollowers";
-            this.btnFollowers.Size = new System.Drawing.Size(56, 19);
+            this.btnFollowers.Size = new System.Drawing.Size(75, 23);
             this.btnFollowers.TabIndex = 1;
             this.btnFollowers.Text = "Followers";
             this.btnFollowers.UseVisualStyleBackColor = true;
             this.btnFollowers.Click += new System.EventHandler(this.btnFollowers_Click);
             // 
-            // btnFollowing
-            // 
-            this.btnFollowing.Location = new System.Drawing.Point(805, 11);
-            this.btnFollowing.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.btnFollowing.Name = "btnFollowing";
-            this.btnFollowing.Size = new System.Drawing.Size(56, 19);
-            this.btnFollowing.TabIndex = 2;
-            this.btnFollowing.Text = "Following";
-            this.btnFollowing.UseVisualStyleBackColor = true;
-            this.btnFollowing.Click += new System.EventHandler(this.btnFollowing_Click);
-            // 
             // btnBuildMaster
             // 
-            this.btnBuildMaster.Location = new System.Drawing.Point(865, 11);
-            this.btnBuildMaster.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnBuildMaster.Location = new System.Drawing.Point(1153, 14);
+            this.btnBuildMaster.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnBuildMaster.Name = "btnBuildMaster";
-            this.btnBuildMaster.Size = new System.Drawing.Size(72, 48);
+            this.btnBuildMaster.Size = new System.Drawing.Size(96, 59);
             this.btnBuildMaster.TabIndex = 3;
             this.btnBuildMaster.Text = "Build Master List";
             this.btnBuildMaster.UseVisualStyleBackColor = true;
@@ -79,23 +68,34 @@
             // 
             // tbLog
             // 
-            this.tbLog.Location = new System.Drawing.Point(805, 64);
+            this.tbLog.Location = new System.Drawing.Point(1073, 79);
+            this.tbLog.Margin = new System.Windows.Forms.Padding(4);
             this.tbLog.Name = "tbLog";
-            this.tbLog.Size = new System.Drawing.Size(192, 648);
+            this.tbLog.Size = new System.Drawing.Size(255, 797);
             this.tbLog.TabIndex = 4;
             this.tbLog.Text = "";
             // 
+            // btnLoad
+            // 
+            this.btnLoad.Location = new System.Drawing.Point(1073, 14);
+            this.btnLoad.Name = "btnLoad";
+            this.btnLoad.Size = new System.Drawing.Size(75, 23);
+            this.btnLoad.TabIndex = 5;
+            this.btnLoad.Text = "Load";
+            this.btnLoad.UseVisualStyleBackColor = true;
+            this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1008, 729);
+            this.ClientSize = new System.Drawing.Size(1344, 897);
+            this.Controls.Add(this.btnLoad);
             this.Controls.Add(this.tbLog);
             this.Controls.Add(this.btnBuildMaster);
-            this.Controls.Add(this.btnFollowing);
             this.Controls.Add(this.btnFollowers);
             this.Controls.Add(this.wbMain);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
@@ -106,9 +106,9 @@
 
         private System.Windows.Forms.WebBrowser wbMain;
         private System.Windows.Forms.Button btnFollowers;
-        private System.Windows.Forms.Button btnFollowing;
         private System.Windows.Forms.Button btnBuildMaster;
         private System.Windows.Forms.RichTextBox tbLog;
+        private System.Windows.Forms.Button btnLoad;
     }
 }
 
