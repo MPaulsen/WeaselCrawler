@@ -6,15 +6,22 @@ using System.Threading.Tasks;
 
 namespace WeasylScraper
 {
-    class User
+    public class User
     {
-        String username { get; set; }
-        int followers { get; set; }
-        int following { get; set; }
+        public string username { get; set; }
+        public int followers { get; set; }
+        public int following { get; set; }
+        public int pageviews { get; set; }
+        public int favoritesGiven { get; set; }
+        public int favoritesReceived { get; set; }
+        public int submissions { get; set; }
+        public int journals { get; set; }
+        public DateTime joined { get; set; }
 
         public User(string name)
         {
             this.username = name;
         }
+
     }
 }
