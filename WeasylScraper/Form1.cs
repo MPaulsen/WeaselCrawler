@@ -103,11 +103,13 @@ namespace WeasylScraper
             {
                 WriteMasterList();
                 tbLog.AppendText("Wrote to master flat file.\n");
+                tbLog.ScrollToCaret();
                 //return;
             }
 
             //Randomized thread sleep timer between 0.1 - 1.0 seconds to at least attempt to appear to be legitimate traffic.
             tbLog.AppendText("Crawling " + nextUser + ".\n");
+            tbLog.ScrollToCaret();
             wbMain.Navigate("http://weasyl.com/following/" + nextUser);
             
         }
@@ -121,6 +123,7 @@ namespace WeasylScraper
             if (CrawledHash.Contains(currentUser))
             {
                 tbLog.AppendText("Skipping " + currentUser + ", already crawled.\n");
+                tbLog.ScrollToCaret();
                 NextUser();
                 return;
             }
