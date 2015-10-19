@@ -22,7 +22,8 @@ namespace WeasylScraper
         public int CrawlIndex = -1;
         int function = 0; //1 - Followers | 2 - Following | 3 - Build Master List
         User currentUser;
-
+        int crawledCount = 0;
+        int masterCount = 0;
 
         public Form1()
         {
@@ -95,6 +96,7 @@ namespace WeasylScraper
             if (MasterList.Count < CrawlIndex + 1)
             {
                 WriteMasterList();
+                tbLog.AppendText("Process Complete!\n");
                 return;
             }
             string nextUser = MasterList[CrawlIndex].username;
@@ -109,6 +111,8 @@ namespace WeasylScraper
 
             //Randomized thread sleep timer between 0.1 - 1.0 seconds to at least attempt to appear to be legitimate traffic.
             tbLog.AppendText("Crawling " + nextUser + ".\n");
+            crawledCount++;
+            lblCrawled.Text = "Crawled: " + crawledCount;
             tbLog.ScrollToCaret();
             wbMain.Navigate("http://weasyl.com/following/" + nextUser);
             
@@ -148,6 +152,8 @@ namespace WeasylScraper
                     MasterList.Add(new User(userName));
                     MasterHash.Add(userName);
                     tbLog.AppendText("Found user: " + userName + "\n");
+                    masterCount++;
+                    lblFound.Text = "Found: " + masterCount;
                     tbLog.ScrollToCaret();
                 }
                 
@@ -188,8 +194,7 @@ namespace WeasylScraper
 
         private void LoadMasterFile()
         {
-            int crawledCount = 0;
-            int masterCount = 0;
+            
             foreach (string line in File.ReadLines("MasterList.txt"))
             {
                 if (!line.Contains("*"))
@@ -203,6 +208,8 @@ namespace WeasylScraper
             }
 
             tbLog.AppendText("Master file loaded.\nTotal Users: " + masterCount + "\nAlready Crawled: " + crawledCount + "\n");
+            lblFound.Text = "Found: " + masterCount;
+            lblCrawled.Text = "Crawled: " + crawledCount;
         }
 
         private void btnLoad_Click(object sender, EventArgs e)

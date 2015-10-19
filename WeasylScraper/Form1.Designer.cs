@@ -33,6 +33,8 @@
             this.btnBuildMaster = new System.Windows.Forms.Button();
             this.tbLog = new System.Windows.Forms.RichTextBox();
             this.btnLoad = new System.Windows.Forms.Button();
+            this.lblFound = new System.Windows.Forms.Label();
+            this.lblCrawled = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // wbMain
@@ -68,10 +70,10 @@
             // 
             // tbLog
             // 
-            this.tbLog.Location = new System.Drawing.Point(1073, 79);
+            this.tbLog.Location = new System.Drawing.Point(1073, 115);
             this.tbLog.Margin = new System.Windows.Forms.Padding(4);
             this.tbLog.Name = "tbLog";
-            this.tbLog.Size = new System.Drawing.Size(255, 797);
+            this.tbLog.Size = new System.Drawing.Size(255, 761);
             this.tbLog.TabIndex = 4;
             this.tbLog.Text = "";
             // 
@@ -85,11 +87,33 @@
             this.btnLoad.UseVisualStyleBackColor = true;
             this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
             // 
+            // lblFound
+            // 
+            this.lblFound.AutoSize = true;
+            this.lblFound.Location = new System.Drawing.Point(1074, 94);
+            this.lblFound.Name = "lblFound";
+            this.lblFound.Size = new System.Drawing.Size(52, 17);
+            this.lblFound.TabIndex = 6;
+            this.lblFound.Text = "Found:";
+            // 
+            // lblCrawled
+            // 
+            this.lblCrawled.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCrawled.AutoSize = true;
+            this.lblCrawled.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblCrawled.Location = new System.Drawing.Point(1212, 94);
+            this.lblCrawled.Name = "lblCrawled";
+            this.lblCrawled.Size = new System.Drawing.Size(62, 17);
+            this.lblCrawled.TabIndex = 7;
+            this.lblCrawled.Text = "Crawled:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1344, 897);
+            this.Controls.Add(this.lblCrawled);
+            this.Controls.Add(this.lblFound);
             this.Controls.Add(this.btnLoad);
             this.Controls.Add(this.tbLog);
             this.Controls.Add(this.btnBuildMaster);
@@ -99,6 +123,7 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -109,6 +134,8 @@
         private System.Windows.Forms.Button btnBuildMaster;
         private System.Windows.Forms.RichTextBox tbLog;
         private System.Windows.Forms.Button btnLoad;
+        private System.Windows.Forms.Label lblFound;
+        private System.Windows.Forms.Label lblCrawled;
     }
 }
 
